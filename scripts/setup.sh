@@ -14,6 +14,7 @@ fi
 
 # Install dependencies and build project
 if [ -f package.json ]; then
+  npm install
   npm ci
   npm run build
 fi
