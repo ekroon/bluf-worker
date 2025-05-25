@@ -1,0 +1,14 @@
+name = "bluf-worker"
+main = "src/worker.ts"
+compatibility_date = "2023-12-01"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["UserLog"]
+
+[[durable_objects]]
+binding = "USER_LOG"
+class_name = "UserLog"
+
+[site]
+bucket = "./public"

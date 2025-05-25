@@ -1,0 +1,15 @@
+{
+  "name": "bluf-worker",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "wrangler dev --local",
+    "deploy": "wrangler publish",
+    "setup": "bash scripts/setup.sh"
+  },
+  "devDependencies": {
+    "wrangler": "^3.4.0",
+    "typescript": "^5.2.2"
+  }
+}
