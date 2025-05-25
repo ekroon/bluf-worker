@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BLUF Journal</title>
+</head>
+<body>
+<h1>BLUF Journal</h1>
+<textarea id="bluf" rows="4" cols="50" placeholder="Write your BLUF"></textarea>
+<br>
+<button id="submit">Add Entry</button>
+<ul id="entries"></ul>
+<script>
+async function load() {
+  const res = await fetch('/list');
+  const entries = await res.json();
+  const ul = document.getElementById('entries');
+  ul.innerHTML = '';
+  entries.forEach(e => {
+    const li = document.createElement('li');
+    li.textContent = new Date(e.timestamp).toLocaleString() + ': ' + e.bluf;
+    ul.appendChild(li);
+  });
+}
+
+document.getElementById('submit').addEventListener('click', async () => {
+  const textArea = document.getElementById('bluf');
+  const bluf = textArea.value.trim();
+  if (!bluf) return;
+  await fetch('/add', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ bluf })
+  });
+  textArea.value = '';
+  load();
+});
+
+load();
+</script>
+</body>
+</html>
